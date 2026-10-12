@@ -1,0 +1,584 @@
+<title>Flowvenue SI Validation Campaign</title>
+
+<style>
+:root {
+  --blue: #3B82F6;
+  --emerald: #10B981;
+  --charcoal: #1F2937;
+  --slate: #64748B;
+  --light: #F8FAFC;
+  --white: #FFFFFF;
+  --bg: #0F172A;
+  --fg: #E2E8F0;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    --bg: #FFFFFF;
+    --fg: #1F2937;
+    --light: #F3F4F6;
+    color-scheme: light;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #0F172A;
+  --fg: #E2E8F0;
+  color-scheme: dark;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow: hidden;
+  height: 100vh;
+  width: 100%;
+}
+
+html, body { height: 100%; width: 100%; }
+
+.deck {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+.slides {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}
+
+.slide {
+  flex: 0 0 100%;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 60px 40px;
+}
+
+.slide.active {
+  display: flex;
+}
+
+.slide-content {
+  max-width: 900px;
+  width: 100%;
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.slide-1 {
+  background: linear-gradient(135deg, var(--charcoal) 0%, var(--blue) 100%);
+  text-align: center;
+}
+
+.slide-1 h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--white);
+  text-wrap: balance;
+}
+
+.slide-1 .subtitle {
+  font-size: 1.25rem;
+  color: var(--light);
+  margin-bottom: 32px;
+  font-weight: 300;
+}
+
+.slide-1 .meta {
+  font-size: 0.95rem;
+  color: var(--emerald);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-top: 40px;
+}
+
+.slide-2, .slide-3, .slide-4, .slide-5 {
+  background: var(--bg);
+}
+
+.slide h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 32px;
+  color: var(--blue);
+  text-wrap: balance;
+}
+
+.slide h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--emerald);
+  margin-top: 24px;
+  margin-bottom: 12px;
+}
+
+.slide p {
+  font-size: 1rem;
+  color: var(--fg);
+  margin-bottom: 16px;
+  line-height: 1.7;
+}
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin: 24px 0;
+}
+
+.timeline-item {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.timeline-dot {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--emerald);
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+.timeline-item.step-a .timeline-dot { background: var(--blue); }
+.timeline-item.step-b .timeline-dot { background: var(--emerald); }
+.timeline-item.step-c .timeline-dot { background: #F59E0B; }
+
+.timeline-text h4 {
+  font-weight: 600;
+  color: var(--fg);
+  margin-bottom: 4px;
+}
+
+.timeline-text p {
+  font-size: 0.95rem;
+  color: var(--slate);
+  margin: 0;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin: 24px 0;
+}
+
+.grid-item {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 8px;
+  padding: 24px;
+}
+
+.grid-item h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--blue);
+  margin-bottom: 12px;
+}
+
+.grid-item p {
+  font-size: 0.95rem;
+  color: var(--fg);
+  margin: 0;
+  line-height: 1.6;
+}
+
+.trial-structure {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
+  border: 2px solid var(--emerald);
+  border-radius: 8px;
+  padding: 24px;
+  margin: 24px 0;
+}
+
+.trial-structure h4 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--emerald);
+  margin-bottom: 16px;
+}
+
+.trial-sessions {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.session {
+  background: rgba(16, 185, 129, 0.2);
+  border-radius: 6px;
+  padding: 12px;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--emerald);
+}
+
+.debrief {
+  background: rgba(59, 130, 246, 0.2);
+  border-radius: 6px;
+  padding: 12px;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--blue);
+}
+
+.budget-item {
+  margin-bottom: 16px;
+}
+
+.budget-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--fg);
+}
+
+.budget-bar {
+  width: 100%;
+  height: 24px;
+  background: rgba(100, 116, 139, 0.2);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.budget-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--blue), var(--emerald));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.nav {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.nav button {
+  background: var(--blue);
+  border: none;
+  color: white;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.nav button:hover {
+  background: var(--emerald);
+  transform: scale(1.1);
+}
+
+.nav button:active {
+  transform: scale(0.95);
+}
+
+.slide-counter {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--slate);
+  min-width: 60px;
+  text-align: center;
+}
+
+.dots {
+  display: flex;
+  gap: 8px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(59, 130, 246, 0.3);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.dot:hover {
+  background: rgba(59, 130, 246, 0.6);
+}
+
+.dot.active {
+  background: var(--blue);
+  width: 24px;
+  border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+  .slide { padding: 40px 24px; }
+  .slide h2 { font-size: 1.8rem; }
+  .slide-1 h1 { font-size: 2rem; }
+  .grid-2 { grid-template-columns: 1fr; gap: 20px; }
+  .trial-sessions { grid-template-columns: repeat(2, 1fr); }
+  .nav { gap: 12px; bottom: 24px; }
+  .nav button { width: 40px; height: 40px; font-size: 1.2rem; }
+}
+
+@media (max-width: 480px) {
+  .slide { padding: 32px 16px; }
+  .slide h2 { font-size: 1.5rem; margin-bottom: 20px; }
+  .slide-1 h1 { font-size: 1.5rem; }
+  .slide-1 .subtitle { font-size: 1rem; }
+}
+</style>
+
+<div class="deck">
+  <div class="slides">
+    <!-- Slide 1: Title -->
+    <div class="slide slide-1 active">
+      <div class="slide-content">
+        <h1>Flowvenue</h1>
+        <p class="subtitle">Message-to-Market Fit Validation Campaign</p>
+        <div class="meta">SI Custom Development • Q4 2026 • 34 Accounts</div>
+      </div>
+    </div>
+
+    <!-- Slide 2: Il Flusso -->
+    <div class="slide slide-2">
+      <div class="slide-content">
+        <h2>Il Flusso: Sequenza Email 6-Step</h2>
+        <p style="margin-bottom: 24px; color: var(--slate);">Una sequenza lineare, una email ogni 7 giorni. Biforcazione solo su chi risponde.</p>
+        <div class="timeline">
+          <div class="timeline-item step-a">
+            <div class="timeline-dot"></div>
+            <div class="timeline-text">
+              <h4>Day 0: Hook</h4>
+              <p>Rivoluzione per chi scrive codice • Problema di costo + agitazione</p>
+            </div>
+          </div>
+          <div class="timeline-item step-a">
+            <div class="timeline-dot"></div>
+            <div class="timeline-text">
+              <h4>Day 7: Narrative A</h4>
+              <p><strong>Velocità</strong> — riduttore di tempo (mesi → settimane)</p>
+            </div>
+          </div>
+          <div class="timeline-item step-a">
+            <div class="timeline-dot"></div>
+            <div class="timeline-text">
+              <h4>Day 14: Narrative B</h4>
+              <p><strong>Margini</strong> — protettore di profittabilità su custom</p>
+            </div>
+          </div>
+          <div class="timeline-item step-b">
+            <div class="timeline-dot"></div>
+            <div class="timeline-text">
+              <h4>Day 21: Narrative C</h4>
+              <p><strong>Risorse</strong> — liberatore di dev, fai più progetti</p>
+            </div>
+          </div>
+          <div class="timeline-item step-b">
+            <div class="timeline-dot"></div>
+            <div class="timeline-text">
+              <h4>Day 28: Narrative D</h4>
+              <p><strong>Differenziazione</strong> — competitive moat vs big 4</p>
+            </div>
+          </div>
+          <div class="timeline-item step-c">
+            <div class="timeline-dot"></div>
+            <div class="timeline-text">
+              <h4>Day 35: FOMO Gentile</h4>
+              <p>Chiusura rispettosa • Raccolta warm leads • Pool per 2027</p>
+            </div>
+          </div>
+        </div>
+        <p style="margin-top: 24px; padding: 16px; background: rgba(59, 130, 246, 0.1); border-radius: 6px; border-left: 3px solid var(--blue); color: var(--fg); font-size: 0.95rem;">
+          <strong>Biforcazione:</strong> Tutti ricevono Email 1. Chi non risponde continua nella sequenza. Chi risponde (warm lead) → passa a discovery call + trial.
+        </p>
+      </div>
+    </div>
+
+    <!-- Slide 3: Trial & Partner Success -->
+    <div class="slide slide-3">
+      <div class="slide-content">
+        <h2>Il Trial: 4 Settimane di Sperimentazione</h2>
+        <p style="margin-bottom: 24px; color: var(--slate);">SI crea una vera app custom dentro Flowvenue. Partner success guida il percorso.</p>
+        <div class="trial-structure">
+          <h4>Struttura del Trial</h4>
+          <p style="margin-bottom: 16px; font-size: 0.95rem; color: var(--fg);">4 sessioni di customer success/partner support + 1 ora di debrief finale.</p>
+          <div class="trial-sessions">
+            <div class="session">Settimana 1<br/>30 min</div>
+            <div class="session">Settimana 2<br/>30 min</div>
+            <div class="session">Settimana 3<br/>30 min</div>
+            <div class="session">Settimana 4<br/>30 min</div>
+          </div>
+          <div class="debrief">Debrief Finale: 1 ora</div>
+        </div>
+        <div class="grid-2">
+          <div class="grid-item">
+            <h4>Partner Success Role</h4>
+            <p>• Onboarding e setup<br/>• Best practices su custom<br/>• Troubleshooting tecnico<br/>• Feature advocacy<br/>• Success coaching</p>
+          </div>
+          <div class="grid-item">
+            <h4>SI Outcome</h4>
+            <p>• Crea app custom reale<br/>• Capisce valore di Flowvenue<br/>• Testa velocità di delivery<br/>• Valida ROI per clienti<br/>• Data per decision</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 4: Outcomes & Learnings -->
+    <div class="slide slide-4">
+      <div class="slide-content">
+        <h2>Outcomes & Learnings</h2>
+        <p style="margin-bottom: 24px; color: var(--slate);">Misuriamo i risultati che contano: chi accetta il trial, chi è davvero interessato, quale narrativa apre conversazioni commerciali.</p>
+        <div class="grid-2">
+          <div class="grid-item">
+            <h4>Metriche Reali</h4>
+            <p>• Quanti SI accettano il trial<br/>• Quanti SI completano il trial<br/>• Warm leads pronti adesso (count)<br/>• Nurture pool per Q1 2027 (count)<br/>• Quale narrative apre conversazioni concrete</p>
+          </div>
+          <div class="grid-item">
+            <h4>Output Finale</h4>
+            <p>• Winning narrative (Velocità? Margini? Risorse?)<br/>• Winning segment (vertical, size, partner status)<br/>• Positioning 2027 GTM<br/>• Pilot-ready SI (numero reale)<br/>• Messaging playbook proof</p>
+          </div>
+        </div>
+        <p style="margin-top: 24px; padding: 16px; background: rgba(16, 185, 129, 0.1); border-radius: 6px; border-left: 3px solid var(--emerald); color: var(--fg); font-size: 0.95rem;">
+          <strong>Non contiamo:</strong> email aperte, reply rate, sentiment su email. <strong>Contiamo:</strong> chi entra in trial, chi la completa, chi dice sì adesso, chi dice "riparliamone Q1 2027".
+        </p>
+      </div>
+    </div>
+
+    <!-- Slide 5: Budget & Allocation -->
+    <div class="slide slide-5">
+      <div class="slide-content">
+        <h2>Budget & Timeline: 50 Ore su 12 Settimane</h2>
+        <p style="margin-bottom: 24px; color: var(--slate);">Allocazione realistica con contingency per follow-up (0 ore se silenzio, ore solo se converte).</p>
+        <div style="margin: 24px 0;">
+          <div class="budget-item">
+            <div class="budget-label"><span>Enrichment + Prep Hook</span><span>8h</span></div>
+            <div class="budget-bar"><div class="budget-fill" style="width: 16%">8h</div></div>
+          </div>
+          <div class="budget-item">
+            <div class="budget-label"><span>Testing & Monitoring (Narrative A-D)</span><span>8h</span></div>
+            <div class="budget-bar"><div class="budget-fill" style="width: 16%">8h</div></div>
+          </div>
+          <div class="budget-item">
+            <div class="budget-label"><span>Active Follow-up (se warm leads)</span><span>3h</span></div>
+            <div class="budget-bar"><div class="budget-fill" style="width: 6%">3h</div></div>
+          </div>
+          <div class="budget-item">
+            <div class="budget-label"><span>Trial #1 + #2 Support</span><span>8h</span></div>
+            <div class="budget-bar"><div class="budget-fill" style="width: 16%">8h</div></div>
+          </div>
+          <div class="budget-item">
+            <div class="budget-label"><span>Learnings + Negotiation</span><span>7h</span></div>
+            <div class="budget-bar"><div class="budget-fill" style="width: 14%">7h</div></div>
+          </div>
+          <div class="budget-item">
+            <div class="budget-label"><span>Buffer (follow-up contingency)</span><span>14h</span></div>
+            <div class="budget-bar"><div class="budget-fill" style="width: 28%; background: linear-gradient(90deg, rgba(245, 158, 11, 0.6), rgba(245, 158, 11, 0.4))">14h</div></div>
+          </div>
+        </div>
+        <div style="margin-top: 32px; padding: 16px; background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(16, 185, 129, 0.1)); border-radius: 6px; border: 1px solid rgba(59, 130, 246, 0.2);">
+          <p style="margin: 0; font-size: 0.95rem; color: var(--fg);"><strong>Nota critica:</strong> Le ore di follow-up sono contingenti. Se una email genera silenzio = 0 ore. Se genera risposta warm = si attacca calendar, si fa appuntamento, si fa accadere il trial. Il buffer di 14h copre l'imprevedibilità.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <div class="nav">
+    <button id="prev-btn" aria-label="Slide precedente">‹</button>
+    <span class="slide-counter"><span id="current-slide">1</span> / 5</span>
+    <div class="dots">
+      <div class="dot active" data-slide="0"></div>
+      <div class="dot" data-slide="1"></div>
+      <div class="dot" data-slide="2"></div>
+      <div class="dot" data-slide="3"></div>
+      <div class="dot" data-slide="4"></div>
+    </div>
+    <button id="next-btn" aria-label="Prossima slide">›</button>
+  </div>
+</div>
+
+<script>
+let currentSlide = 0;
+const slides = document.querySelectorAll('.slide');
+const dots = document.querySelectorAll('.dot');
+const slideCounter = document.getElementById('current-slide');
+const prevBtn = document.getElementById('prev-btn');
+const nextBtn = document.getElementById('next-btn');
+
+function updateSlide() {
+  slides.forEach((slide, i) => {
+    slide.classList.toggle('active', i === currentSlide);
+  });
+  dots.forEach((dot, i) => {
+    dot.classList.toggle('active', i === currentSlide);
+  });
+  slideCounter.textContent = currentSlide + 1;
+}
+
+function nextSlide() {
+  currentSlide = (currentSlide + 1) % slides.length;
+  updateSlide();
+}
+
+function previousSlide() {
+  currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+  updateSlide();
+}
+
+function goToSlide(n) {
+  currentSlide = n;
+  updateSlide();
+}
+
+// Event listeners
+prevBtn.addEventListener('click', previousSlide);
+nextBtn.addEventListener('click', nextSlide);
+
+dots.forEach(dot => {
+  dot.addEventListener('click', () => {
+    goToSlide(parseInt(dot.dataset.slide));
+  });
+});
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'ArrowRight') nextSlide();
+  if (e.key === 'ArrowLeft') previousSlide();
+});
+
+// Initial setup
+updateSlide();
+</script>
